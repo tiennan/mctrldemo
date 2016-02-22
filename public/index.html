@@ -252,7 +252,7 @@
       }
     }
 
-    #mctrlqrcode{
+    #qrcode{
         width: 150px;
         height: 150px;
         position: relative;
@@ -284,7 +284,8 @@
               <p class="lead">
                 Scan the QR-code. Swipe your phone to enjoy the greatest user experience for online reading.
               </p>
-              <img id="mctrlqrcode" src="" />
+              <!--<img id="mctrlqrcode" src="" />-->
+              <div id="qrcode"></div>
             </div>
           </div>
         </div>
@@ -318,6 +319,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./libs/jquery-1.10.2.min.js"></script>
     <script src="./libs/bootstrap/js/bootstrap.js"></script>
+    <script src="./libs/jquery.qrcode.min.js"></script>
     <script>
       !function ($) {
         $(function(){
@@ -343,7 +345,11 @@
       socket.emit('reg', {id: UID});
 
 	  	var url = 'http://'+window.location.host + '/mctrl.html?id=' + UID;
-	  	$('#mctrlqrcode').attr('src', qrcodeapi + encodeURIComponent(url));	
+      $('#qrcode').qrcode({
+        width: 150,
+        height: 150,
+        text: url});
+	  	//$('#mctrlqrcode').attr('src', qrcodeapi + encodeURIComponent(url));
 	  });
 
 	  socket.on('next', function(data){
